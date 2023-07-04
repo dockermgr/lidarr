@@ -1,6 +1,8 @@
 ## 👋 Welcome to lidarr 🚀  
 
-lidarr README  
+Lidarr is a music collection manager for Usenet and BitTorrent users.  
+It can monitor multiple RSS feeds for new tracks from your favorite artists and will grab, sort and rename them.  
+It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available  
   
   
 ## Install my system scripts  
@@ -28,9 +30,10 @@ docker run -d \
 --name casjaysdevdocker-lidarr \
 --hostname lidarr \
 -e TZ=${TIMEZONE:-America/New_York} \
--v $HOME/.local/share/srv/docker/casjaysdevdocker-lidarr/rootfs/data:/data:z \
+-v /mnt/music:/music:z \
+-v /mnt/downloads:/downloads:z \
 -v $HOME/.local/share/srv/docker/casjaysdevdocker-lidarr/rootfs/config:/config:z \
--p 80:80 \
+-p 0.0.0.0:8686:8686 \
 casjaysdevdocker/lidarr:latest
 ```
   
@@ -46,10 +49,11 @@ services:
       - TZ=America/New_York
       - HOSTNAME=lidarr
     volumes:
-      - $HOME/.local/share/srv/docker/casjaysdevdocker-lidarr/rootfs/data:/data:z
+      - /mnt/music:/music:z
+      - /mnt/downloads:/downloads:z
       - $HOME/.local/share/srv/docker/casjaysdevdocker-lidarr/rootfs/config:/config:z
     ports:
-      - 80:80
+      - 0.0.0.0:8686:8686
     restart: always
 ```
   
