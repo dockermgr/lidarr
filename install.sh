@@ -127,12 +127,16 @@ __docker_is_running || printf_exit "Docker is not running"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Define any pre-install scripts
 __run_pre_install() {
+  [ -d "/mnt/music" ] || mkdir -p /mnt/music
+  [ -d "/mnt/downloads" ] || mkdir -p /mnt/downloads
 
   return 0
 }
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Define any post-install scripts
 run_post_install() {
+  chmod 777 /mnt/music
+  chmod 777 /mnt/downloads
 
   return 0
 }
@@ -218,7 +222,7 @@ CONTAINER_HTML_DIR=""
 CONTAINER_HTML_ENV=""
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Set container user and group ID - [yes/no] [id] [id]
-USER_ID_ENABLED="no"
+USER_ID_ENABLED="yes"
 CONTAINER_USER_ID=""
 CONTAINER_GROUP_ID=""
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
