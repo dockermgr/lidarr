@@ -21,9 +21,9 @@ dockermgr update lidarr
 ## Install and run container
   
 ```shell
-mkdir -p "$HOME/.local/share/srv/docker/lidarr/rootfs"
+mkdir -p "$HOME/.local/share/srv/docker/lidarr/volumes"
 git clone "https://github.com/dockermgr/lidarr" "$HOME/.local/share/CasjaysDev/dockermgr/lidarr"
-cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/lidarr/rootfs/." "$HOME/.local/share/srv/docker/lidarr/rootfs/"
+cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/lidarr/volumes/." "$HOME/.local/share/srv/docker/lidarr/volumes/"
 docker run -d \
 --restart always \
 --privileged \
@@ -32,7 +32,7 @@ docker run -d \
 -e TZ=${TIMEZONE:-America/New_York} \
 -v /mnt/music:/music:z \
 -v /mnt/downloads:/downloads:z \
--v $HOME/.local/share/srv/docker/casjaysdevdocker-lidarr/rootfs/config:/config:z \
+-v $HOME/.local/share/srv/docker/casjaysdevdocker-lidarr/volumes/config:/config:z \
 -p 0.0.0.0:8686:8686 \
 casjaysdevdocker/lidarr:latest
 ```
@@ -51,7 +51,7 @@ services:
     volumes:
       - /mnt/music:/music:z
       - /mnt/downloads:/downloads:z
-      - $HOME/.local/share/srv/docker/casjaysdevdocker-lidarr/rootfs/config:/config:z
+      - $HOME/.local/share/srv/docker/casjaysdevdocker-lidarr/volumes/config:/config:z
     ports:
       - 0.0.0.0:8686:8686
     restart: always
